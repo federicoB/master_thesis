@@ -1,0 +1,12 @@
+This thesis researched a Machine Learning model that generates an optimal portfolio asset allocation starting from daily returns of these assets.
+The model was found to generate an allocation with a cumulative return always superior than the baseline algorithm and the equally weighted allocation. Compared to the other two benchmarks, inverse volatility and risk parity, the model performs similarly or better. Increase of cumulative return range from $1.6\%-3.5\%$ annually in comparison with equally weighted to $1.6\%-4.5\%$ with inverse volatility and $0.6\%-3.3\%$ with risk parity. Different input features, all generated from daily returns, were tested and it is suggested to combine daily returns with cumulative returns. Different architectures were examined, namely Long Short Term Memory Network, Temporal Convolutions Networks and Transformers. TCNs was the architecture that guaranteed the best performance. Different techniques of hyperparameters optimization and regularization were applied to guarantee model convergence. Finally, the models work by training on matching a target allocation in a training dataset. This allocation can be generated with classic methods of portfolio optimization like Markowitz, targeting a maximum Sharpe ratio or maximum return. The model will then learn to generate an allocation with the same characteristics.
+This gives our model also a control of risk.
+
+\section{Future work}
+
+A first improvement would be having more data available, simply extending the period before 2013 could make the network better in predicting market phases.
+
+
+The target allocation used had, on purpose, a low variability because it has been noticed models had difficulty matching an allocation that would change nearly every day. Still, better allocations have this characteristic, so to improve the results, the capability to target a more variable allocation would be needed. It has been noticed, like in the plots in figure \ref{fig:allocation_comparison_architecture}, that Transformers generate more variable allocations, so a research using these could be conducted. 
+
+Finally, as in the works of References \cite{weijs2018reinforcement} and \cite{kim2020portfolio} Reinforcement learning should be experimented as it models better human behaviour as desire for a reward. 

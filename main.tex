@@ -1,0 +1,158 @@
+\documentclass[12pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{babel}
+\usepackage{subfig}
+\usepackage{soul}
+\usepackage{import}
+%\usepackage{float}
+\usepackage{floatrow}
+\usepackage{wrapfig}
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage[table,xcdraw]{xcolor}
+\colorlet{RED}{red}
+\usepackage{multirow}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{bold-extra,geometry,
+    amssymb,amsmath,mathtools, microtype,url,cite,listings,appendix}
+\usepackage[bookmarks=true, hidelinks, pdftitle={
+Portfolio optimiziation with Deep Learning methods },
+pdfauthor={Federico Bertani}]{hyperref}
+
+
+\setlength{\parindent}{0pt}
+
+%%%%%%%%%%%%%%%%% New Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 
+% Writes intentionally blank page when there is a \newpage on the left page of
+% a book.
+\newcommand{\intentblankpage}{
+%     Leaves a blank page
+    \newpage
+    \null
+    \vfill
+    \thispagestyle{empty}
+    \begin{center}
+        %\textit{this page was intentionally left blank}
+    \end{center}
+    \newpage
+}
+
+\makeatletter
+    \def\cleardoublepage{\clearpage%
+        \if@twoside
+            \ifodd\c@page\else
+                \vspace*{\fill}
+                \hfill
+                \begin{center}
+                 %   \textit{This page was intentionally left blank}
+                \end{center}
+                \thispagestyle{empty}
+                \newpage
+                \if@twocolumn\hbox{}\newpage\fi
+            \fi
+        \fi
+    }
+\makeatother
+%
+% Length to set margins for 65 chars
+\newlength{\sixtyfivecharwidth}
+\settowidth{\sixtyfivecharwidth}{
+    \normalfont abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz1234567890123}
+% 
+%Integral with the limit below(mathrlap)
+% \newcommand{\intlimr}[1]{\ensuremath{\int \limits_{\mathrlap{#1}}}}
+% 
+% This redefine could cause big issues! See: 
+% http://tex.stackexchange.com/questions/248421/use-mathclap-as-default-in-limits-of-integration
+% \let\oldlimits\limits
+% \def\limits_#1{\oldlimits_{\mathclap{#1}}}
+\def\mclimits_#1{\limits_{\mathclap{#1}}}
+
+%expected value
+\DeclareRobustCommand{\bbone}{\text{\usefont{U}{bbold}{m}{n}1}}
+
+\DeclareMathOperator{\EX}{\mathbb{E}}% expected value
+
+%%%%%%%%%%%%%%%% End New Commands %%%%%%%%%%%%
+
+\begin{document}
+    \pagenumbering{arabic}
+    \input{./titlepage}
+    
+    
+    \newpage
+    
+    \thispagestyle{plain}
+    \begin{center}
+    \textbf{Abstract}
+    \end{center}
+Portfolio optimization is one of the most studied fields that have been researched with machine learning approaches because of its inherent demand for forecasting future market properties. In this thesis, it is shown how one can use deep neural networks with historical returns to do risk adjusted asset allocation. Unlike previous studies which set as target variable asset prices, the variable to predict here is represented by the best asset allocation strategy. Experiments performed on a time period of seven years show that temporal convolutional networks are superior to long short term memory networks and transformers. Compared to baseline benchmarks, the computed allocation has an average increase in the year revenue between 2\% and 5\%. Furthermore, results are compared against equally weighted, inverse volatility and risk parity methods, showing higher cumulative returns than the first method and equal if not higher in some cases than the latters methods.
+
+\vspace{3em}
+
+L'ottimizzazione del portafoglio è uno dei campi più ricercati con approcci di \textit{Machine Learning} a causa della sua domanda intrinseca di previsione delle proprietà future del mercato. In questa tesi, si mostra come si possono usare le \textit{Deep Neural Networks} per fare \textit{asset allocation} con una considerazione del rischio utilizzando i rendimenti storici.  A differenza degli studi precedenti che fissano come variabile obiettivo i prezzi degli asset, qui la variabile da prevedere è rappresentata dalla migliore strategia di asset allocation. Gli esperimenti eseguiti su un periodo di tempo di sette anni mostrano che le \textit{Temporal Convolutional Neural Networks} sono superiori alle \textit{Long Short Term Memory Networks} e ai \textit{Trasformers}. Rispetto ai benchmark di base, l'allocazione calcolata ha un aumento medio delle rendimenti annuali tra il 2\% e il 5\%. Inoltre, i risultati sono confrontati con altri vari metodi: allocazione equipesata, volatilità inversa e parità di rischio, mostrando rendimenti cumulativi superiori al primo metodo e uguali se non superiori in alcuni casi agli ultimi metodi.
+
+
+    
+    \newpage
+    \tableofcontents
+    
+    \newpage
+    \listoffigures
+    
+    \newpage
+    \listoftables
+    
+    \chapter{Introduction} 
+    \label{CH:Intro}
+    \import{}{cap1/cap1.tex}
+    
+    \chapter{Portfolio optimization}
+    \label{CH:theoryFI}
+    \import{}{cap2/cap2.tex}
+
+    \chapter{Deep learning methods}
+    \label{CH:theoryML}
+    \import{}{cap3/cap3.tex}
+    
+    \chapter{Methodology}
+    \label{CH:Model_research}
+    \import{}{cap4/cap4.tex}
+
+
+    \chapter{Results and discussion}
+    \label{CH:Results}
+    \import{}{cap5/cap5.tex}
+    
+    \chapter{Conclusions}
+    \label{CH:Concl}
+    \import{}{cap6.tex}
+    
+%     \nocite{*}
+    \phantomsection
+    \addcontentsline{toc}{chapter}{References}
+    \bibliographystyle{IEEEtran}
+    \bibliography{bibliography}
+
+    
+    \newpage
+    \chapter*{Appendix}
+    \phantomsection
+    \addcontentsline{toc}{chapter}{Appendix}
+    \markboth{Appendix}{Appendix}%
+
+    \import{}{Appendix/Appendix.tex}
+    
+    \newpage
+    \phantomsection
+    \chapter*{Acknowledgements}
+    I would like to thank first my supervisor, the Professor Fabrizio Lillo, for the great help given in writing this work. I am sure that the fact we come from different backgrounds has helped to generate qualitatively superior work. I'm a supporter of interdisciplinary collaboration, and this experience has done nothing but reinforce my opinion.  \\
+    Secondly I would like to thank the dott. Nicola Donelli from Salzenberg AI for its help in introducing me in the task and practical hints during the developing. \\
+    Then, I would like to thank my friends Irene, Antonio, Rio and Maja for their motivational support in these last eight months. \\
+    Lastly but not least, i would like to thank my family for their support, that without it, I would not be here.
+    
+    \vfill
+\end{document}
